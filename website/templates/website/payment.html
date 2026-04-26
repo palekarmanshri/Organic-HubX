@@ -1,0 +1,168 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Secure Payment</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.gateway {
+    background: #fff;
+    width: 800px;
+    height: 480px;
+    border-radius: 16px;
+    display: flex;
+    overflow: hidden;
+}
+
+/* LEFT */
+.left {
+    width: 40%;
+    background: #f7f9fc;
+    padding: 20px;
+}
+
+.left h3 {
+    margin-bottom: 20px;
+}
+
+.method {
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid #ddd;
+}
+
+.method.active {
+    border: 2px solid #4a6cff;
+    background: #eef2ff;
+}
+
+/* RIGHT */
+.right {
+    width: 60%;
+    padding: 25px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 6px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.row {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #4a6cff;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.qr {
+    text-align: center;
+}
+
+.qr img {
+    width: 160px;
+}
+
+.hidden {
+    display: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="gateway">
+
+    <!-- LEFT -->
+    <div class="left">
+        <h3>Payment Methods</h3>
+
+        <div class="method active" onclick="select('card',this)">💳 Debit / Credit Card</div>
+        <div class="method" onclick="select('upi',this)">📱 UPI</div>
+        <div class="method" onclick="select('qr',this)">🔳 QR Code</div>
+
+        <hr>
+        <p><b>Total:</b> ₹{{ order.total_amount }}</p>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right">
+
+        <!-- CARD -->
+        <div id="card">
+            <h3>Debit / Credit Card</h3>
+            <input placeholder="Card Number">
+            <div class="row">
+                <input placeholder="MM / YY">
+                <input placeholder="CVV">
+            </div>
+            <input placeholder="Name on Card">
+        </div>
+
+        <!-- UPI -->
+        <div id="upi" class="hidden">
+            <h3>UPI Payment</h3>
+            <input placeholder="example@upi">
+            <p>Pay using Google Pay / PhonePe / Paytm</p>
+        </div>
+
+        <!-- QR -->
+        <div id="qr" class="hidden qr">
+            <h3>Scan QR</h3>
+            <img src="{% static 'website/images/scanner.png' %}">
+            <p>Scan with any UPI app</p>
+        </div>
+
+        <button onclick="pay()">Pay ₹{{ order.total_amount }}</button>
+
+    </div>
+
+</div>
+
+<script>
+function select(id, el) {
+    document.querySelectorAll('.method').forEach(m => m.classList.remove('active'));
+    el.classList.add('active');
+
+    document.getElementById('card').classList.add('hidden');
+    document.getElementById('upi').classList.add('hidden');
+    document.getElementById('qr').classList.add('hidden');
+
+    document.getElementById(id).classList.remove('hidden');
+}
+
+function pay() {
+    // Absolute redirect (prevents relative URL bug)
+    window.location.assign("{% url 'payment_success' order.order_id %}");
+}
+</script>
+
+
+</body>
+</html>

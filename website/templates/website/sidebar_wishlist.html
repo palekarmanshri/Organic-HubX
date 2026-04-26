@@ -1,0 +1,235 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* SIDEBAR CONTAINER */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            height: 100vh;
+            background-color: #0f6b3f;
+            color: #fff;
+            z-index: 9999;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .sidebar.active {
+            right: 0;
+        }
+        h3{
+            font-family: Henotica;
+            font-size: 20px;
+        }
+        /* CLOSE BUTTON */
+        .close-btn {
+            font-size: 32px;
+            cursor: pointer;
+            float: right;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .close-btn:hover {
+            color: #ffc107;
+        }
+
+        /* TITLE */
+        .sidebar h3 {
+            margin-top: 10px;
+            font-size: 22px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+
+        /* WISHLIST ITEM */
+        .wishlist-item {
+            display: flex;
+            gap: 12px;
+            background: #fff;
+            color: #000;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .wishlist-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .wishlist-item h4 {
+            margin: 0;
+            font-size: 15px;
+        }
+
+        .wishlist-item p {
+            margin: 3px 0;
+            font-size: 13px;
+        }
+
+        /* QTY */
+        .qty-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+
+        .qty-btn {
+            width: 26px;
+            height: 26px;
+            background: #0f6b3f;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .qty-btn:hover {
+            background: #0c5532;
+        }
+
+        /* BUTTONS */
+        .sidebar-btn {
+            width: 100%;
+            margin-top: 12px;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .checkout-btn {
+            background: #ffc107;
+            color: #000;
+            font-family: Henotica;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .checkout-btn:hover {
+            background: #e0a800;
+            color:#0c5532;
+        }
+    </style>
+
+</head>
+
+<body>
+<span class="close-btn" onclick="closeSidebar()">×</span>
+<h3>My Wishlist</h3>
+<hr>
+
+{% if items %}
+    {% for item in items %}
+    <div class="wishlist-item"
+        id="item-{{ item.product.id }}"
+        data-id="{{ item.product.id }}"
+        data-price="{{ item.product.price }}">
+
+        <img src="{{ item.product.image.url }}" class="wishlist-img">
+
+        <div>
+            <h4>{{ item.product.name }}</h4>
+            <p>{{ item.product.quantity }} {{ item.product.unit }}</p>
+            <p>₹{{ item.product.price }}</p>
+
+            <div class="qty-box">
+                <button class="qty-btn" onclick="changeQty('{{ item.product.id }}', -1)">−</button>
+                <span id="qty{{ item.product.id }}" class="qty">{{ item.qty }}</span>
+                <button class="qty-btn" onclick="changeQty('{{ item.product.id }}', 1)">+</button>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <div class="wishlist-total">
+        <strong>Total: ₹<span id="totalPrice">{{ total_price }}</span></strong>
+    </div>
+
+    <a href="{% url 'checkout' %}" class="sidebar-btn checkout-btn">Checkout</a>
+{% else %}
+    <p>Your wishlist is empty</p>
+{% endif %}
+
+
+<button class="sidebar-btn" onclick="loadProfile()">← Back</button>
+<!-- ================= JS ================= -->
+{% if request.user.is_authenticated %}
+<div id="profileSidebar" class="sidebar">
+    <div id="sidebarContent">
+        {% include "website/sidebar_profile.html" %}
+    </div>
+</div>
+{% endif %}
+<script src="{% static 'website/js/cart.js' %}" defer></script>
+<script>
+    function removeItem(productId) {
+    fetch(`/wishlist/remove/${productId}/`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // remove item from DOM
+                const itemDiv = document.getElementById(`item-${productId}`);
+                if(itemDiv) itemDiv.remove();
+
+                // update total
+                const totalElem = document.querySelector(".wishlist-total strong");
+                if(totalElem) totalElem.innerText = "Total: ₹" + data.total_price;
+
+                // if wishlist empty, show message
+                if(document.querySelectorAll(".wishlist-item").length === 0){
+                    document.querySelector(".wishlist-total").innerHTML = "<p>Your wishlist is empty</p>";
+                }
+            }
+        });
+}
+
+
+
+    // 4. SIDEBAR NAVIGATION
+    function loadWishlist() {
+        fetch("/wishlist/sidebar/")
+            .then(res => res.text())
+            .then(html => {
+                document.getElementById("sidebarContent").innerHTML = html;
+                openSidebar();
+            });
+    }
+    
+
+
+    function loadProfile() {
+        fetch("/profile/sidebar/")
+            .then(res => res.text())
+            .then(html => {
+                document.getElementById("sidebarContent").innerHTML = html;
+            });
+    }
+
+    // 4. UI: Open/Close/Toggle
+    function toggleSidebar() {
+        document.getElementById("profileSidebar").classList.toggle("active");
+    }
+
+    function openSidebar() {
+        document.getElementById("profileSidebar").classList.add("active");
+    }
+
+    function closeSidebar() {
+        document.getElementById("profileSidebar").classList.remove("active");
+    }
+    
+</script>
+
+</body>
+</html>

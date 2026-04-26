@@ -1,0 +1,156 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Organic HubX</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'website/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'website/css/login.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+{% if messages %}
+    <div id="messages" style="display:none;">
+    {% for message in messages %}
+        <span>{{ message|escapejs }}</span>
+    {% endfor %}
+    </div>
+    <script>
+    const msgs = document.querySelectorAll('#messages span');
+    msgs.forEach(m => alert(m.innerText));
+    </script>
+{% endif %}
+
+
+<!-- HEADER -->
+<header>
+    <div class="container">
+        <div class="header-wrap">
+            <div class="logo">
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'website/images/Yellow_logo.png' %}" width="120">
+                </a>
+            </div>
+            <div class="hamburger" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+            </div>
+            <nav class="menu">
+                    <ul class="nav-links">
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'about' %}">About</a></li>
+                        <li><a href="{% url 'products' %}">Products</a></li>
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                    </ul>
+                    <div class="profile-icon" onclick="toggleSidebar()">
+                        <img src="{% static 'website/images/profile.png' %}" alt="Profile">
+                    </div>
+                </nav>
+        </div>
+    </div>
+</header>
+
+<!-- LOGIN SECTION -->
+<section id="login-bg">
+    <div class="login-container">
+
+        <div class="login-box">
+            <h2>Welcome Back</h2>
+            <p>Login to your account</p>
+            <form method="POST" action="{% url 'login' %}">
+                {% csrf_token %}
+
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" name="email" placeholder="Enter email" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Enter password" required>
+                </div>
+
+                <button type="submit">Login</button>
+            </form>
+
+            <div class="extra-links">
+                <a href="#">Forgot Password?</a>
+                <span>|</span>
+                <a href="{% url 'register' %}">Register</a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="main-footer">
+    <div class="footer-container">
+
+        <!-- LOGO & ABOUT -->
+        <div class="footer-box">
+            <img src="{% static 'website/images/Yellow_logo.png' %}" class="footer-logo">
+            <p>
+                Organic HubX connects farmers directly with customers,
+                delivering fresh, chemical-free organic produce.
+            </p>
+        </div>
+
+        <!-- QUICK LINKS -->
+        <div class="footer-box">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Products</a></li>
+            </ul>
+        </div>
+
+        <!-- TRACK ORDER -->
+        <div class="footer-box">
+            <h4>Track Order</h4>
+            <ul>
+                <li><a href="{% url 'track_order' %}">Track My Order</a></li>
+                <li><a href="#">Delivery Status</a></li>
+                <li><a href="#">Order History</a></li>
+            </ul>
+        </div>
+
+        <!-- CONTACT -->
+        <div class="footer-box">
+            <h4>Contact Us</h4>
+            <p>Ahina C.H.S </p>
+            <p>Navi Mumbai-410209</p>
+            <p>info@organichubx.com</p>
+            <p>+91 8591906787</p>
+
+            <div class="socials">
+                <i class="fab fa-facebook-f"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-youtube"></i>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2024 Organic HubX. All rights reserved.</p>
+    </div>
+</footer>
+<script>
+function toggleSidebar() {
+    document.getElementById("profileSidebar").classList.toggle("active");
+}
+function toggleMenu() {
+    document.querySelector('.menu').classList.toggle('active');
+}
+</script>
+</body>
+</html>

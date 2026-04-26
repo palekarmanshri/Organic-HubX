@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    </head>
+    <body>
+        <span class="close-btn" onclick="toggleSidebar()">×</span>
+        {% with profile=request.user.profile %}
+    <div class="profile-info">
+
+        <!-- Profile Photo -->
+        {% if profile.photo %}
+            <img src="{{ profile.photo.url }}" class="profile-pic">
+        {% else %}
+            <img src="{% static 'website/images/profile.png' %}" class="profile-pic">
+        {% endif %}
+
+        <!-- Common Info -->
+        <h3>{{ request.user.first_name|default:request.user.username }}</h3>
+        <p class="role">{{ profile.role|title }}</p>
+
+        <hr>
+
+        {% if profile.role == "farmer" %}
+            <!-- FARMER UI -->
+            <p><strong>Phone:</strong> {{ profile.phone }}</p>
+            <p><strong>Email:</strong> {{ request.user.email }}</p>
+
+            <a href="{% url 'farmer_dashboard' %}#add-product" class="sidebar-btn">Add Products</a>
+            <a href="{% url 'farmer_dashboard' %}#card" class="sidebar-btn">My Products</a>
+            <a href="{% url 'farmer_orders' %}" class="sidebar-btn">My Orders</a>
+            <a href="{% url 'farmer_dashboard' %}" class="sidebar-btn">Farmer Dashboard</a>
+        {% else %}
+            <!-- USER UI -->
+            <p><strong>Email:</strong> {{ request.user.email }}</p>
+            <p><strong>Phone:</strong> {{ profile.phone}}</p>
+            <p><strong>Address:</strong> {{ profile.address }}</p>
+
+            <a href="{% url 'my_orders' %}" class="sidebar-btn">My Orders</a>
+            <a class="sidebar-btn" onclick="loadWishlist()">Wishlist</a>
+        {% endif %}
+
+        <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+    </div>
+    {% endwith %}
+    <script>
+function loadWishlist() {
+    fetch("/wishlist/sidebar/")
+        .then(res => res.text())
+        .then(html => {
+            document.getElementById("sidebarContent").innerHTML = html;
+            openSidebar();
+        });
+}
+
+function loadProfile() {
+    fetch("/profile/sidebar/")
+        .then(res => res.text())
+        .then(html => {
+            document.getElementById("sidebarContent").innerHTML = html;
+        });
+}
+
+function openSidebar() {
+    document.getElementById("profileSidebar").classList.add("active");
+}
+
+function closeSidebar() {
+    document.getElementById("profileSidebar").classList.remove("active");
+}
+</script>
+    </body>
+</html>

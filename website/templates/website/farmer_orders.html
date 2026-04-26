@@ -1,0 +1,269 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Farmer Order</title>
+<link rel="stylesheet" href="{% static 'website/css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+    /* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* PAGE BODY */
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #f4f8f5;
+    color: #2c3e2c;
+}
+
+/* PAGE TITLE */
+h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #050404;
+    font-family: Mogilte;
+    font-weight:lighter;
+    font-size: 50px;
+}
+span{
+    color: green;
+}
+/* TABLE WRAPPER */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* TABLE HEAD */
+th {
+    background: #0f6b3c;
+    color: #ffffff;
+    padding: 14px;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* TABLE BODY */
+td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #e3e3e3;
+    font-size: 15px;
+}
+
+/* ROW HOVER */
+tr:hover td {
+    background: #f0faf4;
+}
+
+/* EMPTY MESSAGE */
+td[colspan="6"] {
+    padding: 20px;
+    font-style: italic;
+    color: #888;
+}
+
+/* REVENUE BOX */
+h4 {
+    margin-top: 25px;
+    text-align: right;
+    font-size: 22px;
+    color: #0f6b3c;
+}
+
+/* STATUS COLORS */
+td:nth-child(5) {
+    font-weight: bold;
+}
+
+td:nth-child(5):contains("PENDING") {
+    color: #f39c12;
+}
+
+td:nth-child(5):contains("COMPLETED") {
+    color: #27ae60;
+}
+
+td:nth-child(5):contains("CANCELLED") {
+    color: #e74c3c;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    tr {
+        margin-bottom: 15px;
+    }
+
+    th {
+        display: none;
+    }
+
+    td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    td::before {
+        position: absolute;
+        left: 15px;
+        font-weight: bold;
+        color: #0f6b3c;
+        text-align: left;
+    }
+
+    td:nth-of-type(1)::before { content: "Order ID"; }
+    td:nth-of-type(2)::before { content: "Product"; }
+    td:nth-of-type(3)::before { content: "Quantity"; }
+    td:nth-of-type(4)::before { content: "Total"; }
+    td:nth-of-type(5)::before { content: "Status"; }
+    td:nth-of-type(6)::before { content: "Ordered On"; }
+
+    h3 {
+        text-align: center;
+    }
+}
+
+</style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-wrap">
+                <div class="logo">
+                    <a href="{% url 'home' %}">
+                        <img src="{% static 'website/images/Yellow_logo.png' %}" alt="Organic HubX" width="120">
+                    </a>
+                </div>
+                <div class="hamburger" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <nav class="menu">
+                    <ul class="nav-links">
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'about' %}">About</a></li>
+                        <li><a href="{% url 'products' %}">Products</a></li>
+                        <li><a href="{% url 'contact' %}">Contact</a></li>
+                    </ul>
+                    {% if user.is_authenticated %}
+                    <div class="profile-icon" onclick="toggleSidebar()">
+                        <img src="{% static 'website/images/profile.png' %}" alt="Profile">
+                    </div>
+                    {% endif %}
+
+                </nav>
+            </div>
+        </div>
+    </header>
+<div class="orders-container">
+{% block content %}
+<h2>My <span>Orders</span></h2>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Order ID</th>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Total</th>
+        <th>Status</th>
+        <th>Ordered On</th>
+    </tr>
+
+    {% for item in order_items %}
+    <tr>
+        <td>{{ item.order.id }}</td>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.qty }}</td>
+        <td>₹{{ item.price }}</td>
+        <td>{{ item.order.status }}</td>
+        <td>{{ item.order.created_at }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="6">No orders received yet</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h4>Total Revenue: ₹{{ total_revenue }}</h4>
+{% endblock %}
+</div>
+<footer class="main-footer">
+    <div class="footer-container">
+        <div class="footer-box">
+            <img src="{% static 'website/images/Yellow_logo.png' %}" class="footer-logo">
+            <p>
+                Organic HubX connects farmers directly with customers,
+                delivering fresh, chemical-free organic produce.
+            </p>
+        </div>
+        <div class="footer-box">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'products' %}">Products</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-box">
+            <h4>Track Order</h4>
+            <ul>
+                <li><a href="{% url 'track_order' %}">Track My Order</a></li>
+                <li><a href="#">Delivery Status</a></li>
+                <li><a href="#">Order History</a></li>
+            </ul>
+        </div>
+        <div class="footer-box">
+            <h4>Contact Us</h4>
+            <p>Ahina C.H.S </p>
+            <p>Navi Mumbai-410209</p>
+            <p>info@organichubx.com</p>
+            <p>+91 8591906787</p>
+
+            <div class="socials">
+                <i class="fab fa-facebook-f"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-youtube"></i>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2024 Organic HubX. All rights reserved.</p>
+    </div>
+</footer>
+
+{% if request.user.is_authenticated %}
+<div id="profileSidebar" class="sidebar">
+    <div id="sidebarContent">
+        {% include "website/sidebar_profile.html" %}
+    </div>
+</div>
+{% endif %}
+<script>
+function toggleSidebar() {
+    document.getElementById("profileSidebar").classList.toggle("active");
+}
+function toggleMenu() {
+    document.querySelector('.menu').classList.toggle('active');
+}
+</script>
+</body>
+</html>

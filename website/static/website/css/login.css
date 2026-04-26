@@ -1,0 +1,135 @@
+/* FULL SCREEN BACKGROUND SLIDESHOW */
+#login-bg {
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    animation: loginBg 12s infinite ease-in-out;
+    position: relative;
+}
+
+/* DARK OVERLAY */
+#login-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 0;
+}
+
+/* CENTER LOGIN FORM */
+.login-container {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+@media (max-width: 480px) {
+    .login-box {
+        padding: 30px 20px;
+    }
+
+    .login-box h2 {
+        font-size: 22px;
+    }
+}
+
+/* LOGIN CARD */
+.login-box {
+    margin-top: 60px;
+    max-width: 360px;
+    width: 360px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 40px 30px;
+    border-radius: 18px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* TEXT */
+.login-box h2 {
+    text-align: center;
+    color: #aff7aa;
+    font-family: Henotica;
+    font-size: 35px;
+}
+
+.login-box p {
+    text-align: center;
+    color: white;
+    margin-bottom: 25px;
+    font-size: 20px;
+}
+
+/* INPUTS */
+.input-group {
+    margin-bottom: 18px;
+}
+
+.input-group label {
+    font-size: 18px;
+    color: white;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 6px;
+    border: 1px solid #cdf3b8;
+}
+
+/* BUTTON */
+.login-box button {
+    width: 100%;
+    padding: 12px;
+    background: #0c703e;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 20px;
+    font-family:Henotica ;
+    cursor: pointer;
+}
+
+.login-box button:hover {
+    background: #095b32;
+}
+
+/* LINKS */
+.extra-links {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.extra-links a {
+    color: #aff7aa;
+    text-decoration: none;
+    font-size: 16px;
+
+}
+
+/* BACKGROUND ANIMATION */
+@keyframes loginBg {
+    0%, 100% {
+        background-image: url("../images/main1.jpg");
+    }
+    33% {
+        background-image: url("../images/main2.jpg");
+    }
+}
+
+/* FADE IN */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,303 @@
+{% load static %}
+{% load cart_extras %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>Organic HubX</title>
+
+    <!-- CSS -->
+    <style>
+        /* ============================
+CHECKOUT PAGE STYLES
+============================ */
+
+.checkout-title h2 {
+    font-family: Mogilte;
+    text-align: center;
+    font-weight:lighter;
+    font-size: 50px;
+    color:rgb(1, 32, 1);
+    margin-top: 100px;
+}
+
+/* Checkout Table */
+table {
+    width: 85%;
+    margin: 0 auto 30px;
+    border-collapse: collapse;
+    background: #ffffff;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+table th {
+    background-color: #2e7d32;
+    color: #ffffff;
+    padding: 14px;
+    font-size: 15px;
+    text-transform: uppercase;
+}
+
+table td {
+    padding: 12px;
+    font-size: 14px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+table tr:last-child td {
+    border-bottom: none;
+}
+
+table td:first-child {
+    text-align: left;
+    font-weight: 500;
+}
+
+/* Total Amount */
+h3 {
+    text-align: right;
+    width: 85%;
+    margin: 0 auto 30px;
+    font-size: 22px;
+    color: #1b5e20;
+}
+
+/* Place Order Button */
+form {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+form button {
+    background: #fbc02d;
+    color: #2e7d32;
+    border: none;
+    padding: 14px 40px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+form button:hover {
+    background: #f9a825;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    table, h3 {
+        width: 95%;
+    }
+
+    table th, table td {
+        font-size: 13px;
+        padding: 10px;
+    }
+
+    h2 {
+        font-size: 26px;
+    }
+}
+
+/* Print Friendly (Invoice) */
+@media print {
+    header, footer, .profile-icon {
+        display: none;
+    }
+
+    table {
+        box-shadow: none;
+    }
+
+    form button {
+        display: none;
+    }
+}
+
+    </style>
+    <link rel="stylesheet" href="{% static 'website/css/style.css' %}">
+</head>
+<body>
+
+<!-- MAIN HERO SECTION -->
+<!-- <section id="main_content"> -->
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <div class="header-wrap">
+                <div class="logo">
+                    <a href="{% url 'home' %}">
+                        <img src="{% static 'website/images/Yellow_logo.png' %}" alt="Organic HubX" width="120">
+                    </a>
+                </div>
+                <div class="hamburger" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <nav class="menu">
+                    <ul class="nav-links">
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'about' %}">About</a></li>
+                        <li><a href="{% url 'products' %}">Products</a></li>
+                        <li><a href="{% url 'contact' %}">Contact</a></li>
+                    </ul>
+                    {% if user.is_authenticated %}
+                    <div class="profile-icon" onclick="toggleSidebar()">
+                        <img src="{% static 'website/images/profile.png' %}" alt="Profile">
+                    </div>
+                    {% endif %}
+
+                </nav>
+            </div>
+        </div>
+    </header>
+    <div class="checkout-title">
+    <h2>Checkout</h2>
+    </div>
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Product</th>
+        <th>Qty</th>
+        <th>Price</th>
+        <th>Total</th>
+    </tr>
+
+    {% for product in products %}
+    <tr>
+        <td>{{ product.name }}</td>
+        <td>{{ cart|get_item:product.id }}</td>
+        <td>₹{{ product.price }}</td>
+        <td>₹{{ product.price|floatformat:2 }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h3>Total Amount: ₹{{ total }}</h3>
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit">Place Order</button>
+</form>
+
+
+    <footer class="main-footer">
+    <div class="footer-container">
+
+        <!-- LOGO & ABOUT -->
+        <div class="footer-box">
+            <img src="{% static 'website/images/Yellow_logo.png' %}" class="footer-logo">
+            <p>
+                Organic HubX connects farmers directly with customers,
+                delivering fresh, chemical-free organic produce.
+            </p>
+        </div>
+
+        <!-- QUICK LINKS -->
+        <div class="footer-box">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Products</a></li>
+            </ul>
+        </div>
+
+        <!-- TRACK ORDER -->
+        <div class="footer-box">
+            <h4>Track Order</h4>
+            <ul>
+                <li><a href="{% url 'track_order' %}">Track My Order</a></li>
+                <li><a href="#">Delivery Status</a></li>
+                <li><a href="#">Order History</a></li>
+            </ul>
+        </div>
+
+        <!-- CONTACT -->
+        <div class="footer-box">
+            <h4>Contact Us</h4>
+            <p>Ahina C.H.S </p>
+            <p>Navi Mumbai-410209</p>
+            <p>info@organichubx.com</p>
+            <p>+91 8591906787</p>
+
+            <div class="social-icons">
+                <a href="#"></a>
+                <a href="#"></a>
+                <a href="#"></a>
+                <a href="#"></a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2024 Organic HubX. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Profile Sidebar -->
+{% if request.user.is_authenticated %}
+<div id="profileSidebar" class="sidebar">
+    <span class="close-btn" onclick="toggleSidebar()">x</span>
+
+    {% with profile=request.user.profile %}
+    <div class="profile-info">
+
+        <!-- Profile Photo -->
+        {% if profile.photo %}
+            <img src="{{ profile.photo.url }}" class="profile-pic">
+        {% else %}
+            <img src="{% static 'website/images/profile.png' %}" class="profile-pic">
+        {% endif %}
+
+        <!-- Common Info -->
+        <h3>{{ request.user.first_name|default:request.user.username }}</h3>
+        <p class="role">{{ profile.role|title }}</p>
+
+        <hr>
+
+        {% if profile.role == "farmer" %}
+            <!-- FARMER UI -->
+            <p><strong>Farm Name:</strong> {{ profile.farm_name }}</p>
+            <p><strong>Location:</strong> {{ profile.farm_location }}</p>
+            <p><strong>Phone:</strong> {{ profile.phone }}</p>
+            <p><strong>Email:</strong> {{ request.user.email }}</p>
+
+            <a href="{% url 'farmer_dashboard' %}#add-product" class="sidebar-btn">Add Products</a>
+            <a href="{% url 'farmer_dashboard' %}#card" class="sidebar-btn">My Products</a>
+        {% else %}
+            <!-- USER UI -->
+            <p><strong>Email:</strong> {{ request.user.email }}</p>
+            <p><strong>Phone:</strong> {{ profile.phone }}</p>
+            <p><strong>Address:</strong> {{ profile.address }}</p>
+
+            <a href="#" class="sidebar-btn">My Orders</a>
+            <a href="#" class="sidebar-btn">Wishlist</a>
+        {% endif %}
+
+        <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+    </div>
+    {% endwith %}
+</div>
+{% endif %}
+
+<script>
+function toggleSidebar() {
+    document.getElementById("profileSidebar").classList.toggle("active");
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,181 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Organic HubX</title>
+    <link rel="stylesheet" href="{% static 'website/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'website/css/register.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="header-wrap">
+            <div class="logo">
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'website/images/Yellow_logo.png' %}" width="120">
+                </a>
+            </div>
+            <div class="hamburger" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+            <nav class="menu">
+                    <ul class="nav-links">
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'about' %}">About</a></li>
+                        <li><a href="{% url 'products' %}">Products</a></li>
+                        <li><a href="{% url 'contact' %}">Contact</a></li>
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                    </ul>
+                    <div class="profile-icon" onclick="toggleSidebar()">
+                        <img src="{% static 'website/images/profile.png' %}" alt="Profile">
+                    </div>
+                </nav>
+        </div>
+    </div>
+</header>
+
+<section id="register-bg">
+
+    <div class="register-container">
+        <div class="register-box">
+            <h2>Create Account</h2>
+            <p>Join Organic HubX</p>
+{% if messages %}
+    {% for message in messages %}
+        <p style="color:red;">{{ message }}</p>
+    {% endfor %}
+{% endif %}
+
+            <form method="POST" action="{% url 'register' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <!-- Role -->
+                <div class="role-select">
+                    <label>
+                        <input type="radio" name="role" value="farmer" required>
+                        Farmer
+                    </label>
+                    <label>
+                        <input type="radio" name="role" value="user">
+                        User
+                    </label>
+                </div>
+
+                <!-- Name -->
+                <div class="input-group">
+                    <input type="text" name="name" placeholder="Full Name" required>
+                </div>
+
+                <!-- Email -->
+                <div class="input-group">
+                    <input type="email" name="email" placeholder="Email Address" required>
+                </div>
+
+                <!-- Phone -->
+                <div class="input-group">
+                    <input type="tel" name="phone" placeholder="Phone Number" required>
+                </div>
+
+                <!-- Address -->
+                <div class="input-group">
+                    <textarea name="address" placeholder="Address" required></textarea>
+                </div>
+
+                <!-- Photo -->
+                <div class="input-group">
+                    <label class="file-label">Upload Photo</label>
+                    <input type="file" name="photo" accept="image/*">
+                </div>
+
+                <!-- Password -->
+                <div class="input-group">
+                    <input type="password" name="password" placeholder="Password" required>
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="input-group">
+                    <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+                </div>
+
+                <button type="submit">Register</button>
+
+                <div class="extra-links">
+                    Already have an account?
+                    <a href="{% url 'login' %}">Login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</section>
+<footer class="main-footer">
+    <div class="footer-container">
+
+        <!-- LOGO & ABOUT -->
+        <div class="footer-box">
+            <img src="{% static 'website/images/Yellow_logo.png' %}" class="footer-logo">
+            <p>
+                Organic HubX connects farmers directly with customers,
+                delivering fresh, chemical-free organic produce.
+            </p>
+        </div>
+
+        <!-- QUICK LINKS -->
+        <div class="footer-box">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'products' %}">Products</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+            </ul>
+        </div>
+
+        <!-- TRACK ORDER -->
+        <div class="footer-box">
+            <h4>Track Order</h4>
+            <ul>
+                <li><a href="{% url 'track_order' %}">Track My Order</a></li>
+                <li><a href="#">Delivery Status</a></li>
+                <li><a href="#">Order History</a></li>
+            </ul>
+        </div>
+
+        <!-- CONTACT -->
+        <div class="footer-box">
+            <h4>Contact Us</h4>
+            <p>Ahina C.H.S </p>
+            <p>Navi Mumbai-410209</p>
+            <p>info@organichubx.com</p>
+            <p>+91 8591906787</p>
+
+            <div class="socials">
+                <i class="fab fa-facebook-f"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-youtube"></i>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2024 Organic HubX. All rights reserved.</p>
+    </div>
+</footer>
+<script>
+function toggleSidebar() {
+    document.getElementById("profileSidebar").classList.toggle("active");
+}
+function toggleMenu() {
+    document.querySelector('.menu').classList.toggle('active');
+}
+</script>
+</body>
+</html>

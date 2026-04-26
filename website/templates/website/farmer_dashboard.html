@@ -1,0 +1,222 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Dashboard | Organic HubX</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'website/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'website/css/farmer_dashboard.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+<!-- <section id="main_content"> -->
+<!-- HEADER -->
+<header>
+    <div class="container">
+        <div class="header-wrap">
+            <div class="logo">
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'website/images/Yellow_logo.png' %}" alt="Organic HubX" width="120">
+                </a>
+            </div>
+            <div class="hamburger" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+            </div>
+            <nav class="menu">
+                    <ul class="nav-links">
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'about' %}">About</a></li>
+                        <li><a href="{% url 'products' %}">Products</a></li>
+                        <li><a href="{% url 'contact' %}">Contact</a></li>
+                    </ul>
+                    {% if user.is_authenticated %}
+                    <div class="profile-icon" onclick="toggleSidebar()">
+                        <img src="{% static 'website/images/profile.png' %}" alt="Profile">
+                    </div>
+                    {% endif %}
+                </nav>
+        </div>
+    </div>
+</header>
+<section id="image-content">
+        <div class="img1"><h1>Organic HubX</h1>
+            <h4>Fresh. Clean. Organic.</h4><div>
+</section>
+</section>
+<h5>Farmer <span>Dashboard</span></h5>
+<div class="dashboard-container" id="add-product">
+    <h2>Farm Fresh Upload</h2>
+    <form method="POST" enctype="multipart/form-data" class="add-product-form">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Product Name" required>
+        <textarea name="description" placeholder="Description" required></textarea>
+        <input type="number" name="price" placeholder="Price" required>
+        <input type="number" name="quantity" placeholder="Quantity" required>
+        <select name="unit" required>
+            <option value="" disabled selected>Select Unit</option>
+            <option value="kg">Kilogram (kg)</option>
+            <option value="g">Gram (g)</option>
+            <option value="l">Liter (l)</option>
+            <option value="ml">Milliliter (ml)</option>
+            <option value="unit">Per Unit</option>
+        </select>
+        <select name="category" required>
+        {% for cat in categories %}
+            <option value="{{ cat.id }}">{{ cat.name }}</option>
+        {% endfor %}
+        </select>
+
+        <input type="file" name="image" required>
+        <button type="submit">Add Product</button>
+    </form>
+</div>
+<h4>Fresh From My Farm</h4>
+<div class="product_card" id="card">
+<div class="scroll-wrapper">
+
+    <!-- Left Arrow -->
+    <button class="scroll-btn left" onclick="scrollLeft()">&#10094;</button>
+
+    <!-- Horizontal Scroll Container -->
+    <div class="horizontal-scroll" id="productScroll">
+        {% if products %}
+            {% for p in products %}
+            <div class="product-card">
+                {% if p.image %}
+                <img src="{{ p.image.url }}" alt="{{ p.name }}">
+                {% endif %}
+                <div class="product-info">
+                    <h6>{{ p.name }}</h6>
+                    <p class="price">₹{{ p.price }}</p>
+                    <p class="description">{{ p.description }}</p>
+                    <p class="quantity">
+                        Available: {{ p.quantity }} {{ p.unit }}
+                    </p>
+                </div>
+
+                <div class="product-actions">
+                    <a href="{% url 'edit_product' p.id %}" class="btn edit">Edit</a>
+                    <form action="{% url 'delete_product' p.id %}" method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit"
+                                class="btn delete"
+                                onclick="return confirm('Delete this product?')">
+                            Delete
+                        </button>
+                    </form>
+
+                </div>
+
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>No products added yet.</p>
+        {% endif %}
+
+    </div>
+
+    <!-- Right Arrow -->
+    <button class="scroll-btn right" onclick="scrollRight()">&#10095;</button>
+
+</div>
+</div>
+<footer class="main-footer">
+    <div class="footer-container">
+
+        <!-- LOGO & ABOUT -->
+        <div class="footer-box">
+            <img src="{% static 'website/images/Yellow_logo.png' %}" class="footer-logo">
+            <p>
+                Organic HubX connects farmers directly with customers,
+                delivering fresh, chemical-free organic produce.
+            </p>
+        </div>
+
+        <!-- QUICK LINKS -->
+        <div class="footer-box">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'products' %}">Products</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+            </ul>
+        </div>
+
+        <!-- TRACK ORDER -->
+        <div class="footer-box">
+            <h4>Track Order</h4>
+            <ul>
+                <li><a href="{% url 'track_order' %}">Track My Order</a></li>
+                <li><a href="#">Delivery Status</a></li>
+                <li><a href="#">Order History</a></li>
+            </ul>
+        </div>
+
+        <!-- CONTACT -->
+        <div class="footer-box">
+            <h4>Contact Us</h4>
+            <p>Ahina C.H.S </p>
+            <p>Navi Mumbai-410209</p>
+            <p>info@organichubx.com</p>
+            <p>+91 8591906787</p>
+
+            <div class="socials">
+                <i class="fab fa-facebook-f"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-youtube"></i>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2024 Organic HubX. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Profile Sidebar -->
+{% if request.user.is_authenticated %}
+<div id="profileSidebar" class="sidebar">
+    <!-- <span class="close-btn" onclick="toggleSidebar()">×</span> -->
+
+    <div id="sidebarContent">
+        {% include "website/sidebar_profile.html" %}
+    </div>
+
+</div>
+{% endif %}
+
+<script>
+function toggleSidebar() {
+    document.getElementById("profileSidebar").classList.toggle("active");
+}
+function toggleMenu() {
+    document.querySelector('.menu').classList.toggle('active');
+}
+
+const scrollContainer = document.getElementById("productScroll");
+
+/* Arrow Scroll */
+function scrollLeft() {
+    scrollContainer.scrollBy({ left: -350, behavior: "smooth" });
+}
+
+function scrollRight() {
+    scrollContainer.scrollBy({ left: 350, behavior: "smooth" });
+}
+
+scrollContainer.addEventListener("mouseenter", () => clearInterval(autoScroll));
+scrollContainer.addEventListener("mouseleave", () => {
+    autoScroll = setInterval(autoScrollProducts, 3000);
+});
+</script>
+
+</body>
+</html>

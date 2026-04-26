@@ -1,0 +1,118 @@
+/* ===============================
+    TRACK ORDER PAGE
+================================ */
+#main_content {
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    padding-top: 80px;
+    animation: photos 10s infinite ease-in-out;
+}
+.container {
+    width: 100%;
+    padding: 0 30px;
+    background-color: rgba(10, 16, 12, 0.72);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+.track-section {
+    max-width: 500px;
+    margin: 80px auto;
+    background: #ffffff;
+    padding: 80px 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Heading */
+.track-section h2 {
+    font-size: 28px;
+    margin-bottom: 25px;
+    color: #0f6b3f;
+    font-weight: 600;
+}
+
+/* FORM */
+.track-section form {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+/* Input */
+.track-section input[type="text"] {
+    flex: 1;
+    padding: 12px 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    outline: none;
+}
+
+.track-section input[type="text"]:focus {
+    border-color: #0f6b3f;
+}
+
+/* Button */
+.track-section button {
+    background-color: #0f6b3f;
+    color: #fff;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.track-section button:hover {
+    background-color: #0c5532;
+}
+
+/* ORDER RESULT */
+.track-section hr {
+    margin: 25px 0;
+    border: none;
+    height: 1px;
+    background: #e0e0e0;
+}
+
+/* Order details */
+.track-section p {
+    font-size: 15px;
+    margin: 10px 0;
+    color: #333;
+}
+
+.track-section p strong {
+    color: #000;
+}
+
+/* Not Found Message */
+.track-section p:last-child {
+    color: #d9534f;
+    font-weight: 500;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 600px) {
+    .track-section {
+        margin: 40px 15px;
+        padding: 25px 20px;
+    }
+
+    .track-section form {
+        flex-direction: column;
+    }
+
+    .track-section button {
+        width: 100%;
+    }
+}

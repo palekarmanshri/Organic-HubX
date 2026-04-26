@@ -1,0 +1,111 @@
+/* EDIT PRODUCT PAGE */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+    background: #c3e2c3;
+}
+
+/* Page Wrapper */
+.edit-container {
+    max-width: 520px;
+    margin: 80px auto;
+    background: #ffffff;
+    padding: 35px;
+    border-radius: 14px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Heading */
+.edit-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #2e7d32;
+    font-weight: 600;
+    font-family: Henotica;
+}
+
+/* Form */
+.edit-form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Inputs */
+.edit-form input,
+.edit-form textarea,
+.edit-form select {
+    padding: 12px 14px;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    border: 1px solid #cfd8dc;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+/* Focus Effect */
+.edit-form input:focus,
+.edit-form textarea:focus,
+.edit-form select:focus {
+    outline: none;
+    border-color: #2e7d32;
+    box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.15);
+}
+
+/* Textarea */
+.edit-form textarea {
+    resize: none;
+    height: 90px;
+}
+
+/* Image Upload */
+.edit-form input[type="file"] {
+    padding: 8px;
+}
+
+/* Buttons */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.btn {
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    transition: 0.2s ease;
+    text-decoration: none;
+    text-align: center;
+}
+
+/* Update Button */
+.btn-update {
+    background: #2e7d32;
+    color: #ffffff;
+}
+
+.btn-update:hover {
+    background: #256628;
+}
+
+/* Cancel Button */
+.btn-cancel {
+    background: #e0e0e0;
+    color: #333;
+}
+
+.btn-cancel:hover {
+    background: #cfcfcf;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .edit-container {
+        margin: 30px 15px;
+        padding: 25px;
+    }
+}

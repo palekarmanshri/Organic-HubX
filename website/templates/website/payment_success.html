@@ -1,0 +1,142 @@
+{% load static %}
+{% load cart_extras %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Success</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f5f7fb;
+        }
+
+        .success-card {
+            background: #ffffff;
+            width: 90%;
+            max-width: 600px;
+            padding: 40px 30px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .check-icon {
+            width: 80px;
+            height: 80px;
+            background: #2ecc71;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .check-icon svg {
+            width: 40px;
+            height: 40px;
+            fill: #fff;
+        }
+
+        .success-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #2ecc71;
+            margin-bottom: 10px;
+        }
+
+        .success-text {
+            font-size: 16px;
+            color: #6c757d;
+            margin-bottom: 30px;
+        }
+
+        .success-text span {
+            font-size: 22px;
+            margin-right: 5px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background: #7b61ff;
+            color: #ffffff;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #684efc;
+        }
+
+        .btn svg {
+            width: 18px;
+            height: 18px;
+            fill: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="success-card">
+        <div class="check-icon">
+            <!-- Check Icon -->
+            <svg viewBox="0 0 24 24">
+                <path d="M9 16.17l-3.88-3.88-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+            </svg>
+        </div>
+
+        <h2 class="success-title">
+            Order Placed Successfully!
+        </h2>
+
+        <p class="success-text">
+            Your invoice has been sent to your email.
+        </p>
+
+        <a href="{% url 'products' %}" class="btn">
+            Continue Shopping
+        </a>
+        <p style="color:#6c757d; margin-top:10px;">
+            Redirecting to products page in <span id="count">5</span> seconds...
+        </p>
+
+    </div>
+<script>
+    let time = 5;
+    const counter = document.getElementById("count");
+
+    const timer = setInterval(() => {
+        time--;
+        counter.innerText = time;
+
+        if (time === 0) {
+            clearInterval(timer);
+            window.location.href = "{% url 'products' %}";
+        }
+    }, 1000);
+</script>
+
+</body>
+</html>
+
