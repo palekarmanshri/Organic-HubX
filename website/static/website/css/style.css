@@ -59,9 +59,9 @@ section {
 .menu ul li a {
     color: white;
     text-decoration: none;
-    font-family: "Bodoni Moda", serif;
+    font-family: "Playfair Display", serif;
     font-optical-sizing: auto;
-    font-weight: lighter;
+    font-weight: 400;
     font-size: 20px;
     padding: 6px 14px;
     border-radius: 20px;
@@ -152,7 +152,9 @@ section {
     color:green;
 }
 .child1 p{
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
     font-size: 20px;
     color:rgb(134, 129, 129);
 }
@@ -280,7 +282,9 @@ section {
 .txt h5{
     font-size: 18px;
     margin-top: 10px;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
     color:rgb(120, 121, 120);
     text-align: center;
 }
@@ -327,8 +331,10 @@ section {
     font-size: 14px;
     margin-top: 10px;
     font-weight: lighter;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    color:rgb(151, 152, 151);
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    color:rgb(120, 121, 120);
     text-align: center;
 }
 #about-us{
@@ -354,7 +360,9 @@ section {
     color:green;
 }
 .ab1 p{
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
     font-size: 20px;
     color:rgb(134, 129, 129);
 }
@@ -437,6 +445,8 @@ section {
 
 .profile-info h3 {
     margin-bottom: 5px;
+    font-family: "DM Serif Display", serif;
+    font-weight: 400;
 }
 
 .profile-info p {

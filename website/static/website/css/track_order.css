@@ -98,10 +98,6 @@
     font-weight: 500;
 }
 
-/* ===============================
-   RESPONSIVE
-================================ */
-
 @media (max-width: 600px) {
     .track-section {
         margin: 40px 15px;

@@ -53,7 +53,9 @@
 .login-box h2 {
     text-align: center;
     color: #aff7aa;
-    font-family: Henotica;
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
     font-size: 35px;
 }
 
@@ -91,7 +93,9 @@
     border: none;
     border-radius: 8px;
     font-size: 20px;
-    font-family:Henotica ;
+    font-family: "Bodoni Moda", serif;
+    font-optical-sizing: auto;
+    font-weight: lighter;
     cursor: pointer;
 }
 
