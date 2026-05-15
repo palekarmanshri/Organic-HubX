@@ -5,7 +5,6 @@
     box-sizing: border-box;
 }
 
-/* PAGE */
 body {
     background: white;
 }
@@ -77,9 +76,7 @@ span{
     font-family: Begiano Serif;
     font-weight: lighter;
 }
-/* ===========================
-    Add Product Form
-=========================== */
+
 .add-product-form {
     display: flex;
     flex-direction: column;
@@ -119,9 +116,6 @@ span{
     color: #565555;
 }
 
-/* ===========================
-    Product Cards
-=========================== */
 h4{
     font-family: Henotica;
     text-align: center;
@@ -129,14 +123,13 @@ h4{
     font-size: 30px;
     color:rgb(0, 0, 0);
 }
-/* Scroll Wrapper */
+
 .scroll-wrapper {
     position: relative;
     width: 100%;
     padding: 20px 0;
 }
 
-/* Horizontal Scroll */
 .horizontal-scroll {
     display: flex;
     gap: 30px;
@@ -149,7 +142,6 @@ h4{
     display: none;
 }
 
-/* Product Card */
 .product-card {
     min-width: 320px;
     background:  #c7f5c3;
@@ -161,7 +153,6 @@ h4{
     align-items: center;
 }
 
-/* Product Image */
 .product-card img {
     width: 180px;
     height: 180px;
@@ -170,7 +161,6 @@ h4{
     padding-top: 5px;
 }
 
-/* Info */
 .product-info {
     text-align: center;
     margin-top: 10px;
@@ -198,14 +188,13 @@ h4{
     color: #555;
     padding: 5px;
 }
-/* Actions */
+
 .product-actions {
     margin-top: auto;
     display: flex;
     gap: 10px;
 }
 
-/* Buttons */
 .btn.edit {
     background: #2e7d32;
     color: white;
@@ -228,7 +217,7 @@ h4{
 .btn.delete:hover{
     background-color: rgb(123, 44, 44);
 }
-/* Scroll Buttons */
+
 .scroll-btn {
     position: absolute;
     top: 50%;
