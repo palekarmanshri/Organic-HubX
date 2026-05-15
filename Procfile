@@ -1,1 +1,1 @@
-web: gunicorn organichubx.wsgi
+web: gunicorn organichub.wsgi
