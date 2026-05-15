@@ -8,6 +8,8 @@ body {
     background-position: center;
     padding-top: 80px;
     animation: photos 10s infinite ease-in-out;
+    position: relative;
+    overflow: hidden;
 }
 #main_content::before {
     content: "";
@@ -26,23 +28,113 @@ body {
 }
 @media (max-width: 768px) {
 
-    .img1 {
-        width: 90%;
-        height: 200px;
+    #main_content {
+        padding-top: 40px;
+        padding-bottom: 40px;
     }
 
-    .img1 h1 {
-        font-size: 36px;
-        padding-top: 50px;
+    .contact-wrapper {
+        width: 95%;
+        border-radius: 12px;
     }
 
-    .img1 h4 {
-        font-size: 16px;
+    .contact-info,
+    .contact-form {
+        padding: 25px;
+    }
+
+    .contact-info h2,
+    .contact-form h2 {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .contact-info p {
+        font-size: 13px;
+        text-align: center;
+    }
+
+    .info-box {
+        align-items: flex-start;
+    }
+
+    .info-box i {
+        font-size: 18px;
+        margin-top: 4px;
+    }
+
+    .info-box h4 {
+        font-size: 15px;
+    }
+
+    .info-box p {
+        font-size: 13px;
+    }
+
+    .socials {
+        text-align: center;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .contact-form button {
+        padding: 10px;
+        font-size: 15px;
     }
 }
 @media (max-width: 480px) {
-    .contact-info p{
-        font-size: 12px;
+
+    .contact-wrapper {
+        width: 95%;
+    }
+
+    .contact-info,
+    .contact-form {
+        padding: 18px;
+    }
+
+    .contact-info h2,
+    .contact-form h2 {
+        font-size: 20px;
+    }
+
+    .info-box {
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    .info-box i {
+        font-size: 16px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+        font-size: 13px;
+    }
+
+    .contact-form button {
+        font-size: 14px;
+    }
+}
+@media (max-width: 992px) {
+
+    .contact-wrapper {
+        width: 90%;
+        flex-direction: column;
+    }
+
+    .contact-info,
+    .contact-form {
+        width: 100%;
+    }
+
+    .contact-form .row {
+        flex-direction: column;
+        gap: 0;
     }
 }
 
@@ -61,6 +153,8 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 16px;
     overflow: hidden;
+    position: relative;
+    z-index: 1;
 }
 
 /* LEFT */
