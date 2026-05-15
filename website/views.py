@@ -399,3 +399,10 @@ def place_order(request):
 
     request.session['cart'] = {}
     return redirect('order_success')
+
+if not User.objects.filter(username='adminmanshri').exists():
+    User.objects.create_superuser(
+        'adminmanshri',
+        'palekarmanshri45@gmail.com',
+        'manshri@1805'
+    )
