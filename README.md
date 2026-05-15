@@ -4,7 +4,7 @@ Organic HubX is a web-based platform built to promote organic and sustainable pr
 
 🚀 Live Demo
 
-👉 https://palekarmanshri.github.io/Organic-HubX/
+👉 https://organichubx.onrender.com
 
 (Frontend demo via GitHub Pages)
 ------------------------------------------------------------------------------------------
