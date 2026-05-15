@@ -10,11 +10,6 @@ from .utils import generate_invoice_pdf, send_order_email
 from .models import Profile, Product, Order,Contact,Category,Wishlist,OrderItem
 from django.db.models import Sum, F
 
-
-# =========================
-# HOME & STATIC PAGES
-# =========================
-
 def home(request):
     profile = getattr(request.user, 'profile', None) if request.user.is_authenticated else None
     return render(request, 'website/home.html', {'profile': profile})
@@ -32,11 +27,6 @@ def track_order(request):
 
     return render(request, 'website/track_order.html', {'order': order})
 
-
-
-# =========================
-# REGISTRATION
-# =========================
 def register(request):
     if request.method == "POST":
         role = request.POST.get("role")
@@ -60,7 +50,7 @@ def register(request):
 
         # Create user
         user = User.objects.create_user(
-            username=email,  # Django stores email as username
+            username=email,
             email=email,
             password=password,
             first_name=name
@@ -80,16 +70,11 @@ def register(request):
 
     return render(request, "website/register.html")
 
-
-# =========================
-# LOGIN / LOGOUT
-# =========================
 def login_view(request):
     if request.method == "POST":
         email = request.POST.get("email")
         password = request.POST.get("password")
 
-        # Authenticate using email as username
         user = authenticate(request, username=email, password=password)
 
         if user:
@@ -111,24 +96,18 @@ def logout_view(request):
     logout(request)
     return redirect("login")
 
-
-# =========================
-# FARMER DASHBOARD
-# =========================
 @login_required
 def farmer_dashboard(request):
-    # 1. Security Check
     if not hasattr(request.user, 'profile') or request.user.profile.role != "farmer":
         messages.error(request, "Access denied")
         return redirect("home")
 
     categories = Category.objects.all()
 
-    # 2. Handle Form Submission
     if request.method == "POST":
         Product.objects.create(
             farmer=request.user,
-            category_id=request.POST.get("category"), # Uses the ID from the <select>
+            category_id=request.POST.get("category"),
             name=request.POST.get("name"),
             description=request.POST.get("description"),
             price=request.POST.get("price"),
@@ -139,14 +118,11 @@ def farmer_dashboard(request):
         messages.success(request, "Product added successfully")
         return redirect("farmer_dashboard")
 
-    # 3. Fetch data for the GET request
-    # Make sure to filter products by the logged-in farmer
     products = Product.objects.filter(farmer=request.user)
-    
-    # 4. Pass EVERYTHING to the template
+
     return render(request, "website/farmer_dashboard.html", {
         "categories": categories,
-        "products": products  # <--- This was missing!
+        "products": products
     })
 
 
@@ -178,10 +154,6 @@ def delete_product(request, id):
         product.delete()
         return redirect('farmer_dashboard') 
 
-
-# =========================
-# USER PRODUCTS
-# =========================
 def products(request):
     categories = Category.objects.all()
     products = Product.objects.select_related("farmer", "category")
@@ -258,27 +230,22 @@ def wishlist_sidebar(request):
 
 @login_required
 def remove_wishlist_item(request, product_id):
-    # Get the wishlist from session
     wishlist = request.session.get("wishlist", {})
 
-    # Remove the item if it exists
     if str(product_id) in wishlist:
         del wishlist[str(product_id)]
 
-    # Save back to session
     request.session["wishlist"] = wishlist
     request.session.modified = True
 
-    # Recalculate total price
     total_price = 0
     for pid, item in wishlist.items():
         try:
             product = Product.objects.get(id=int(pid))
             total_price += product.price * item.get("qty", 1)
         except Product.DoesNotExist:
-            continue  # skip if product was deleted from DB
+            continue
 
-    # Return success response with updated total
     return JsonResponse({
         "success": True,
         "total_price": total_price
@@ -310,12 +277,12 @@ def checkout(request):
             OrderItem.objects.create(
                 order=order,
                 product=product,
-                farmer=product.farmer,   # ✅ FIX IS HERE
+                farmer=product.farmer, 
                 qty=cart[str(product.id)]['qty'],
                 price=product.price
             )
 
-        request.session['cart'] = {}  # clear cart
+        request.session['cart'] = {}
         return redirect('payment', order_id=order.id)
 
     return render(request, 'website/checkout.html', {
@@ -347,9 +314,6 @@ def update_cart_qty(request):
 
     return JsonResponse({"success": False})
 
-# =========================
-# FARMER ORDERS
-# =========================
 @login_required
 def farmer_orders(request):
     farmer = request.user

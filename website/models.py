@@ -44,7 +44,7 @@ class Product(models.Model):
     unit = models.CharField(
         max_length=10,
         choices=UNIT_CHOICES,
-        default='kg'   # ✅ REQUIRED for existing rows
+        default='kg'
     )
 
     image = models.ImageField(upload_to='products/')
