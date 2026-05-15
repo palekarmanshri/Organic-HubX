@@ -87,7 +87,7 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'your_mysql_db_name',
+            'NAME': 'organichub_db',
             'USER': 'root',
             'PASSWORD': '',
             'HOST': 'localhost',
