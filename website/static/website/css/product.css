@@ -6,9 +6,11 @@
 }
 
 .section-title {
-    font-family: Mogilte;
+    font-family: "Lora", serif;
+    font-optical-sizing: auto;
+    font-weight:bolder;
+    font-style: normal;
     text-align: center;
-    font-weight:lighter;
     font-size: 50px;
     margin:10px;
     color:rgb(1, 32, 1);

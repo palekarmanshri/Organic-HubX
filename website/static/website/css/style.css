@@ -59,8 +59,9 @@ section {
 .menu ul li a {
     color: white;
     text-decoration: none;
-    font-family: Henotica;
-    font-weight: bold;
+    font-family: "Bodoni Moda", serif;
+    font-optical-sizing: auto;
+    font-weight: lighter;
     font-size: 20px;
     padding: 6px 14px;
     border-radius: 20px;
@@ -94,17 +95,22 @@ section {
 }
 
 #hero-content h1 {
-    font-size: 6vw;
+    font-size: 7vw;
     line-height: 1.1;
-    font-family: Mogilte;
+    font-family: "DM Serif Display", serif;
+    font-weight: 400;
+    font-optical-sizing: auto;
+    /* font-weight:bold; */
+    font-style: normal;
     text-shadow: 4px 4px 2px black;
-    font-weight:lighter;
+    
 }
 
 #hero-content h3 {
     font-size: 3vw;
     margin-top: 10px;
-    font-family: Begiano Serif;
+    font-family: "Bodoni Moda", serif;
+    font-optical-sizing: auto;
     font-weight: lighter;
 }
 
@@ -137,8 +143,8 @@ section {
     text-align: center;
 }
 .child1 h1{
-    font-family: Mogilte;
-    font-weight:lighter;
+    font-family: "DM Serif Display", serif;
+    font-weight: 400;
     font-size: 50px;
     color:rgb(1, 32, 1);
 }
@@ -188,9 +194,9 @@ section {
     width:100%;
 }
 #shop-category h2{
-    font-family: Mogilte;
+    font-family: "DM Serif Display", serif;
+    font-weight: 400;
     text-align: center;
-    font-weight:lighter;
     font-size: 50px;
     color:rgb(1, 32, 1);
 }
@@ -231,7 +237,9 @@ section {
 }
 .card h4{
     text-align: center;
-    font-family: Henotica;
+    font-family: "DM Serif Display", serif;
+    font-weight: 400;
+    font-optical-sizing: auto;
     font-size: 25px;
 }
 #why-us{
@@ -241,9 +249,9 @@ section {
     /* border:1px solid black; */
 }
 #why-us h2{
-    font-family: Mogilte;
+    font-family: "DM Serif Display", serif;
+    font-weight: 400;
     text-align: center;
-    font-weight:lighter;
     font-size: 50px;
     color:rgb(1, 32, 1);
 }
@@ -264,8 +272,8 @@ section {
 }
 .txt h3{
     font-size: 30px;
-    font-family:Mogilte;
-    font-weight: lighter;
+    font-family: "DM Serif Display", serif;
+    font-weight: 400;
     color:rgb(67, 115, 67);
     text-align: center;
 }
@@ -283,9 +291,9 @@ section {
     /* border:1px solid black; */
 }
 #testimonials h2{
-    font-family: Mogilte;
+    font-family: "DM Serif Display", serif;
+    font-weight: 400;
     text-align: center;
-    font-weight:lighter;
     font-size: 50px;
     color:rgb(1, 32, 1);
 }
@@ -310,8 +318,8 @@ section {
 .cmt h3{
     font-size: 20px;
     margin-top: 5px;
-    font-family:Mogilte;
-    font-weight: lighter;
+    font-family: "DM Serif Display", serif;
+    font-weight: 400;
     color:rgb(67, 115, 67);
     text-align: center;
 }
@@ -337,8 +345,8 @@ section {
     text-align: center;
 }
 .ab1 h1{
-    font-family: Mogilte;
-    font-weight:lighter;
+    font-family: "DM Serif Display", serif;
+    font-weight: 400;
     font-size: 50px;
     color:rgb(1, 32, 1);
 }
@@ -357,9 +365,9 @@ section {
     /* border: 1px solid black; */
 }
 #services h2{
-    font-family: Mogilte;
+    font-family: "DM Serif Display", serif;
+    font-weight: 400;
     text-align: center;
-    font-weight:lighter;
     font-size: 50px;
     color:rgb(1, 32, 1);
 }
@@ -445,7 +453,8 @@ section {
     margin-top: 20px;
     padding: 10px 20px;
     background: white;
-    font-family: Henotica;
+    font-family: "Bodoni Moda", serif;
+    font-optical-sizing: auto;
     color: #0c703e;
     border-radius: 5px;
     text-decoration: none;
@@ -466,7 +475,9 @@ section {
     text-decoration: none;
     border-radius: 6px;
     transition: 0.3s;
-    font-family: Henotica;
+    font-family: "Bodoni Moda", serif;
+    font-optical-sizing: auto;
+    font-weight: lighter;
 }
 
 .sidebar-btn:hover {
@@ -492,7 +503,9 @@ section {
 .footer-box h4 {
     margin-bottom: 15px;
     font-size: 20px;
-    font-family:Henotica;
+    font-family: "Bodoni Moda", serif;
+    font-optical-sizing: auto;
+    font-weight: lighter;
     color: #e8ffd9;
 }
 
@@ -884,9 +897,10 @@ section {
     }
 .orders-container h2{
     margin-top: 120px;
-    font-family: Mogilte;
+    font-family: "DM Serif Display", serif;
+    font-weight: 400;
     text-align: center;
-    font-weight:lighter;
+
     font-size: 50px;
     color:rgb(1, 32, 1);
 
