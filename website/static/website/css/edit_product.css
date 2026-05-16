@@ -1,12 +1,11 @@
-/* EDIT PRODUCT PAGE */
-
+*{
+    box-sizing: border-box;
+}
 body {
     margin: 0;
     padding: 0;
     background: #c3e2c3;
 }
-
-/* Page Wrapper */
 .edit-container {
     max-width: 520px;
     margin: 80px auto;
@@ -16,7 +15,6 @@ body {
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
 }
 
-/* Heading */
 .edit-container h2 {
     text-align: center;
     margin-bottom: 30px;
@@ -102,10 +100,105 @@ body {
     background: #cfcfcf;
 }
 
-/* Responsive */
-@media (max-width: 600px) {
+@media (max-width: 992px) {
+
     .edit-container {
-        margin: 30px 15px;
-        padding: 25px;
+        width: 92%;
+        max-width: 850px;
+        margin: 100px auto;
+        padding: 40px;
+    }
+
+    .edit-container h2 {
+        font-size: 38px;
+    }
+
+    .edit-form input,
+    .edit-form textarea,
+    .edit-form select {
+        font-size: 18px;
+        padding: 16px;
+    }
+
+    .edit-form textarea {
+        height: 130px;
+    }
+
+    .btn {
+        font-size: 18px;
+        padding: 14px 24px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    body{
+        padding: 0;
+        margin: 0;
+    }
+
+    .edit-container {
+        width: 95%;
+        max-width: 100%;
+        margin: 90px auto 30px;
+        padding: 25px 18px;
+        border-radius: 12px;
+        box-sizing: border-box;
+    }
+
+    .edit-container h2 {
+        font-size: 28px;
+        margin-bottom: 22px;
+    }
+
+    .edit-form input,
+    .edit-form textarea,
+    .edit-form select {
+        width: 100%;
+        font-size: 16px;
+        padding: 14px;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+    }
+
+    .edit-form textarea {
+        height: 120px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 14px;
+        font-size: 16px;
+    }
+}
+
+
+@media (max-width: 480px) {
+
+    .edit-container {
+        width: 97%;
+        padding: 20px 15px;
+        margin-top: 80px;
+    }
+
+    .edit-container h2 {
+        font-size: 24px;
+    }
+
+    .edit-form input,
+    .edit-form textarea,
+    .edit-form select {
+        font-size: 15px;
+        padding: 13px;
+    }
+
+    .btn {
+        font-size: 15px;
+        padding: 13px;
     }
 }
