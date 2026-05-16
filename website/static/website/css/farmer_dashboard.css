@@ -258,15 +258,54 @@ h4{
 .scroll-btn:hover {
     background: #1b5e20;
 }
+@media(max-width: 992px){
+    #image-content{
+    height:auto;
+
+    }
+    .img1{
+        margin-top: 90px;
+        height:200px;
+        width:85%;
+    }
+    .img1 h1{
+    font-size: 50px;
+    padding-top: 45px;
+    }
+    .img1 h4{
+        font-size: 20px;
+    }
+    h5 {
+    margin-top: 50px;
+    }
+}
 
 @media (max-width: 768px) {
+    #image-content{
+    height:auto;
+    }
+    .img1{
+        margin-top: 90px;
+        height:200px;
+        width:90%;
+    }
+    .img1 h1{
+    font-size: 50px;
+    padding-top: 40px;
+    }
+    .img1 h4{
+        font-size: 25px;
+    }
+    h5 {
+    margin-top: 50px;
+    }
     .product-card {
         flex-direction: column;
         align-items: flex-start;
     }
 
     .product-card img {
-        margin-bottom: 10px;
+        margin:10px auto;
     }
 
     .product-actions {

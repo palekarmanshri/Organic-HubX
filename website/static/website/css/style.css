@@ -571,6 +571,169 @@ section {
     font-size: 14px;
 }
 
+@media (max-width: 992px) {
+
+    /* HERO SECTION */
+    #main_content{
+        min-height: 100vh;
+    }
+
+    #hero-content{
+        width: 100%;
+        padding: 0 20px;
+        top: 55%;
+    }
+
+    #hero-content h1{
+        font-size: 60px;
+    }
+
+    #hero-content h3{
+        font-size: 28px;
+        margin-top: 10px;
+    }
+
+    /* MAIN CONTENT */
+    #main-container{
+        height: auto;
+        padding: 40px 0;
+    }
+
+    .child1{
+        width: 90%;
+        height: auto;
+        margin-top: 20px;
+    }
+
+    .child1 h1{
+        font-size: 40px;
+    }
+
+    .child1 p{
+        font-size: 17px;
+        line-height: 1.8;
+        margin-top: 15px;
+    }
+
+    /* IMAGE SECTION */
+    #image-content{
+        height: auto;
+        padding: 20px 0;
+    }
+
+    .img1{
+        width: 90%;
+        height: 220px;
+    }
+
+    .img1 h1{
+        font-size: 50px;
+        padding-top: 55px;
+    }
+
+    .img1 h4{
+        font-size: 20px;
+    }
+
+    /* SECTION HEADINGS */
+    #shop-category h2,
+    #why-us h2,
+    #services h2,
+    #testimonials h2,
+    .ab1 h1{
+        font-size: 40px;
+    }
+
+    /* CARDS */
+    .container-card{
+        height: auto;
+        gap: 25px;
+        padding: 30px 20px;
+    }
+
+    .card{
+        width: 280px;
+        margin-top: 0;
+    }
+
+    /* WHY US */
+    .container-text{
+        height: auto;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .txt{
+        width: 45%;
+        height: auto;
+    }
+
+    .txt h3{
+        font-size: 24px;
+    }
+
+    .txt h5{
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    /* TESTIMONIALS */
+    .container-comment{
+        height: auto;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .cmt{
+        width: 45%;
+        height: auto;
+    }
+
+    .cmt h3{
+        font-size: 18px;
+    }
+
+    .cmt h5{
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    /* ABOUT */
+    #about-us{
+        height: auto;
+    }
+
+    .ab1{
+        width: 90%;
+        height: auto;
+    }
+
+    .ab1 p{
+        font-size: 17px;
+        line-height: 1.8;
+        margin-top: 15px;
+    }
+
+    /* SERVICES */
+    .container-img{
+        height: auto;
+        gap: 25px;
+        padding: 20px;
+    }
+
+    .image{
+        width: 280px;
+        height: 320px;
+        margin-top: 0;
+    }
+
+    .sidebar{
+        width: 320px;
+    }
+    .footer-box{
+        text-align: center;
+    }
+}
 @media (max-width: 768px) {
 
     .header-wrap {
@@ -614,7 +777,7 @@ section {
 
     #hero-content h1 {
         font-size: 60px;
-        margin-top: 90px;
+        margin-top: 50%;
     }
 
     #hero-content h3 {
@@ -673,6 +836,7 @@ section {
     }
     #services h2{
     font-size: 40px;
+    margin-top: 70px;
     }
     #testimonials h2{
     font-size: 40px;
@@ -763,7 +927,12 @@ section {
     .cmt h5 {
         font-size: 14px;
     }
-
+    .ab1 p{
+    font-size: 16px;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    }
     /* SIDEBAR */
     .sidebar {
         width: 100%;
@@ -791,17 +960,20 @@ section {
         margin-top: 20px;
     }
 }
-
-/* SMALL MOBILE DEVICES: UP TO 480PX */
 @media (max-width: 480px) {
     #hero-content h1 {
-        margin-top: 60px;
+        margin-top: 70%;
         font-size: 40px;
         
     }
-
+    .ab1 p{
+    font-size: 12px;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    }
     #hero-content h3 {
-        font-size: 24px;
+        font-size: 20px;
     }
 
     .child1 h1 {
